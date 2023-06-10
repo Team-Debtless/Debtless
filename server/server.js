@@ -20,7 +20,22 @@ app.use('/api', apiRouter);
 
 // add a catch all for 404 pages
 
+app.use('*', (req,res) => {
+  res.status(404).send('404 page not found');
+})
+
 // add a default error handler
+
+app.use((error, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: {err: 'An error occured'},
+  };
+  const errObj = Object.assign({}, defaultErr, error);
+  console.log(errObj.log);
+  res.status(errObj.status).json(errObj.message)
+})
 
 const PORT = 3000;
 
