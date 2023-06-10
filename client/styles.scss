@@ -2,10 +2,39 @@ body{
     
 }
 #loginContainer{
+    box-sizing: border-box;
+    font-family: 'Roboto';
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: rgb(122, 211, 122);
+    border: 4px solid hsl(0, 0%, 100%);
+    text-align: center;
+    box-shadow: 5px 5px 5px 5px rgb(0,0,0,0.2);
     
+}
+
+.signUpTitle {
+  display: flex;
+  justify-content: center;
 }
 
 .signUpForm {
   display: flex;
   justify-content: center;
+  text-align: center;
+}
+
+.clickToLoginBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.chart-container {
+  h2{
+    margin-left: 270px;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  height: 650px;
 }
