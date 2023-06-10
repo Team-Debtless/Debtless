@@ -6,7 +6,7 @@ const cookieController = require('../controllers/cookieController');
 
 // when user signs up
 router.post('/signup', userController.findUserEmail, userController.createUser, cookieController.setUserCookie, (req, res) => {
-  res.status(200).send('User created succesfully');
+  res.status(200).json({ message: 'User created succesfully' });
 });
 
 //when user logs in
