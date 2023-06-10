@@ -4,7 +4,7 @@ CREATE TABLE public.user (
 	"first_name" varchar NOT NULL,
     "last_name" varchar NOT NULL,
 	"description" varchar,
-	"email" varchar  NOT NULL,
+	"email" varchar  NOT NULL UNIQUE,
 	"monthly_income" money NOT NULL,
 	"monthly_budget" money NOT NULL,
 	"password" varchar  NOT NULL

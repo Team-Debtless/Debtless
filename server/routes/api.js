@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 //Import middleware here
-const userController = require('./controllers/userController');
-const cookieController = require('./controllers/cookieController');
+const userController = require('../controllers/userController');
+const cookieController = require('../controllers/cookieController');
 
 // when user signs up
-router.post('/signup', userController.createUser, cookieController.setUserCookie, (req, res) => {
-  res.status(200).json();
+router.post('/signup', userController.findUserEmail, userController.createUser, cookieController.setUserCookie, (req, res) => {
+  res.status(200).send('User created succesfully');
 });
 
 //when user logs in
-router.post('/login', userController.authenticateUser, cookieController.setUserCookie, (req, res) => {
-  res.status(200).json();
-});
+// router.post('/login', userController.authenticateUser, cookieController.setUserCookie, (req, res) => {
+//   res.status(200).json();
+// });
 
 module.exports = router;
