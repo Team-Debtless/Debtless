@@ -1,16 +1,54 @@
-body{
-    
+
+#lemail{
+  width: 61.5%;
+  margin-left: 26px;
 }
 #loginContainer{
-    box-sizing: border-box;
-    font-family: 'Roboto';
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: rgb(122, 211, 122);
-    border: 4px solid hsl(0, 0%, 100%);
+  #loginForm{
+    input {
+      
+      margin-bottom: 10px;
+    }
+    position: absolute;
     text-align: center;
-    box-shadow: 5px 5px 5px 5px rgb(0,0,0,0.2);
+    top: 40%;
+    left: 23%;
     
+  }
+    box-sizing: border-box;
+    font-family: 'Arial';
+    padding: 2rem;
+    background-color: rgb(167, 165, 165);
+    border: 4px solid hsl(0, 0%, 100%);
+    text-align:justify;
+    box-shadow: 1px 1px 1px 1px rgb(0,0,0,0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 300px;
+    
+}
+#loginTitle{
+  display: flex;
+  justify-content: center;
+  align-items:end;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+}
+#needAccount {
+  #resignup{
+    background-color: transparent;
+    border: none;
+  }
+  display: flex;
+  justify-content: center;
+  align-items:end;
+  position: absolute;
+  top: 65%;
+  left: 40%;
 }
 
 .signUpTitle {
@@ -29,12 +67,23 @@ body{
   justify-content: center;
 }
 
-.chart-container {
-  h2{
-    margin-left: 270px;
-  }
+.dashboard {
+  // background-color: aquamarine;
   display: flex;
-  flex-direction: column;
-  justify-content: left;
-  height: 650px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chart-container {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: left;
+  // background-color: red;
+  height: 400px;
+}
+
+.bar-container {
+  width: 400px;
+  background-color: aqua;
+  
 }

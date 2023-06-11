@@ -29,7 +29,7 @@ userController.findUserEmail = async (req, res, next) => {
 userController.hashPassword = (req, res, next) => {
   try{
     const { password } = req.body;
-    bcrypt.hash(user.password, SALT_WORK_FACTOR, (err, hash) => {
+    bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
       req.body.password = hash;
       return next();
     });

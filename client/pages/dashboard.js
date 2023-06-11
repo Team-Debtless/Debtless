@@ -4,6 +4,7 @@ import { CategoryScale } from 'chart.js';
 import { useState } from 'react';
 import PieChart from '../PieChart';
 import Data from '../utils/Data'
+import BarChart from '../BarChart';
 
 Chart.register(CategoryScale);
 
@@ -29,8 +30,8 @@ const Dashboard = () => {
    
   return (
     <div className="dashboard">
-      <p>Using Chart.js in React</p>
       <PieChart chartData={chartData} />
+      <BarChart chartData={chartData} />
     </div>
     )
   }
