@@ -5,13 +5,30 @@ const Login = () => {
   const [emailInput, setEmailInput] = useState('');
   const [passInput, setPassInput] = useState('');
   const navigate = useNavigate();
+
+  const loginUser = (event) => {
+    event.preventDefault();
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: emailInput,
+        password: passInput,
+      })
+    })
+    .then(data => data.json())
+    .then(response => console.log(response.message))
+    .catch(err => {
+      console.log('loginUserError', err);
+    })
+
+    navigate('/dashboard', {replace: true});
+  }
   
   const signUpRedirect = () => {
     navigate('/');
-  }
-  
-  const dashRedirect = () =>{
-    navigate('/dashboard', {replace: true});
   }
   
   const handleEmailInput = (e) => {
@@ -22,16 +39,19 @@ const Login = () => {
     setPassInput(e.target.value);
   }
   return (
+    <div>
+
+    <h1 id='loginTitle'>Login to Debtless</h1>
     <div id='loginContainer'>
-      <h1>Login to Debtless</h1>
-      <form>
+      <form id='loginForm'>
         <label htmlFor='lemail'>Email: </label>
-        <input type='text' id='lemail' placeholder='Enter Email'></input> <br></br>
+        <input type='text' id='lemail' onChange={handleEmailInput} placeholder='Enter Email'></input> <br></br>
         <label htmlFor='lpassword'>Password: </label>
-        <input type='text' id='lpassword' placeholder='Enter Password'></input><br></br>
+        <input type='password' id='lpassword' onChange={handlePassInput} placeholder='Enter Password'></input><br></br>
+        <button type='submit' onClick={loginUser}>Login</button>
       </form>
-      <button type='submit' onClick={dashRedirect}>Login</button>
-      <div>Need an account?<button id='resignup' onClick={signUpRedirect}><u>Signup</u></button></div>
+    </div>
+      <div id='needAccount'>Need an account?<button id='resignup' onClick={signUpRedirect}><u>Signup</u></button></div>
     </div>
   )
 }

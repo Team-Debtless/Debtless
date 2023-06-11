@@ -1,16 +1,16 @@
 import { Bar } from "react-chartjs-2";
+import React from "react";
 
 const BarChart = ({ chartData }) => {
   return (
-    <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Bar Chart</h2>
+    <div className="bar-container">
       <Bar
         data={chartData}
         options={{
           plugins: {
             title: {
               display: true,
-              text: "Users Gained between 2016-2020"
+              text: "Monthly spend vs monthly budget"
             },
             legend: {
               display: false
