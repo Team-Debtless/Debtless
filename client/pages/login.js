@@ -19,7 +19,7 @@ const Login = () => {
       })
     })
     .then(data => data.json())
-    .then(response => window.alert(response.message))
+    .then(response => console.log(response.message))
     .catch(err => {
       console.log('loginUserError', err);
     })
