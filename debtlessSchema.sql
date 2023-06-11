@@ -1,4 +1,5 @@
 
+
 CREATE TABLE public.user (
 	"_id" serial PRIMARY KEY,
 	"first_name" varchar NOT NULL,
@@ -7,16 +8,22 @@ CREATE TABLE public.user (
 	"email" varchar  NOT NULL UNIQUE,
 	"monthly_income" money NOT NULL,
 	"monthly_budget" money NOT NULL,
-	"password" varchar  NOT NULL
+	"password" varchar  NOT NULL,
+  "created_at" date NOT NULL,
+  "updated_at" date,
+  "deleted_at" date
 );
+
 
 CREATE TABLE public.expense (
   "_id" serial PRIMARY KEY,
-  "item" varchar,
-  "category_id" bigint,
-  "price" money,
-  "date" date,
-  "user_id" bigint
+  "item" varchar NOT NULL,
+  "category_id" bigint NOT NULL,
+  "price" money NOT NULL,
+  "user_id" bigint NOT NULL,
+  "created_at" date NOT NULL,
+  "updated_at" date,
+  "deleted_at" date
 );
 
 CREATE TABLE public.category (
@@ -26,13 +33,6 @@ CREATE TABLE public.category (
 
 ALTER TABLE public.expense ADD FOREIGN KEY ("category_id") REFERENCES public.category ("_id");
 ALTER TABLE public.expense ADD FOREIGN KEY ("user_id") REFERENCES public.user ("_id");
-
-/* Not sure if we need month */
--- CREATE TABLE public.month (
--- 	"_id" serial NOT NULL,
---     "name" varchar NOT NULL,
--- 	CONSTRAINT "user_pk" PRIMARY KEY ("_id")
--- );
 
 -- psql -d postgres://cdtsufqu:KrK8Hyu93UEo1ULxk0DiJbNj7QPQDIdV@lallah.db.elephantsql.com/cdtsufqu -f debtlessSchema.sql
 

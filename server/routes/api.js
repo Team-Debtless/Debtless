@@ -3,17 +3,26 @@ const router = express.Router();
 //Import middleware here
 const userController = require('../controllers/userController');
 const cookieController = require('../controllers/cookieController');
+const dataController = require('../controllers/dataController');
 
-// when user signs up
+/*
+  routes user sign in
+*/
 router.post('/signup', userController.findUserEmail, userController.hashPassword, userController.createUser, cookieController.setUserCookie, (req, res) => {
   res.status(200).json({ message: 'User created succesfully' });
 });
 
-//when user logs in
+/*
+  routes user log in
+*/
 router.post('/login', userController.authenticateUser, cookieController.setUserCookie, (req, res) => {
-  res.status(200).json({ message: 'Login successful'});
+  res.status(200).json({ message: 'Login successful' });
 });
 
-// when user wants to add expense
-
+/*
+  routes add an expense to db
+*/
+router.post('/expense', dataController.addExpense, (req, res) => {
+  res.status(200).json({ message: 'Expense added sucessfully' });
+});
 module.exports = router;

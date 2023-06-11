@@ -45,11 +45,12 @@ userController.hashPassword = (req, res, next) => {
 userController.createUser = async (req, res, next) => {
   try {
     const { first_name, last_name, description, email, monthly_income, monthly_budget, password } = req.body;
-    let createUserQuery = `INSERT INTO public.user (first_name, last_name, description, email, monthly_income, monthly_budget, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
-    const data = await db.query(createUserQuery, [first_name, last_name, description, email, monthly_income, monthly_budget, password]);
+    const created_at = new Date();
+    let createUserQuery = `INSERT INTO public.user (first_name, last_name, description, email, monthly_income, monthly_budget, password, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;`;
+    const data = await db.query(createUserQuery, [first_name, last_name, description, email, monthly_income, monthly_budget, password, created_at]);
 
-    const userId = data.rows[0]._id;
-    res.locals.userId = userId;
+    const user_id = data.rows[0]._id;
+    res.locals.user_id = user_id;
     
     return next();
   } catch(err) {
@@ -65,21 +66,19 @@ userController.authenticateUser = async (req, res, next) => {
     const { email, password } = req.body;
     let authenticateUserQuery = 'SELECT * FROM public.user WHERE public.user.email = $1';
     const data = await db.query(authenticateUserQuery, [email]);
-    //remove this line later
-    console.log(data);
     // compares password with hashed password
     const verifyPassword = await bcrypt.compare(password, data.rows[0].password);
 
     // conditional to verify user exists and password is correct
     if (data.rows[0] && verifyPassword) {
       // storing the user id so that we can update the cookie as needed.
-      const userId = data.rows[0]._id;
-      res.locals.userId = userId;
+      const user_id = data.rows[0]._id;
+      res.locals.user_id = user_id;
       return next();
     } else {
       return next({
-        log: `User with ${email} or ${password} doesn't match`,
-        message: { err: 'An error occured on userController.authenticateUser: User email or password doesn not match'}
+        log: 'userController.authenticateUser middleware ERROR: User email or password does not match',
+        message: { err: 'An error occured on userController.authenticateUser: User email or password does not match'}
       });
     }
   }
@@ -91,5 +90,4 @@ userController.authenticateUser = async (req, res, next) => {
   }
 
 }
-    
 module.exports = userController;

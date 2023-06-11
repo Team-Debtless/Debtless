@@ -2,8 +2,8 @@ const cookieController = {};
 
 // generates a cookie to store id of new users and users logged in for frontend to reference
 cookieController.setUserCookie = (req, res, next) => {
-  const { userId } = res.locals;
-  res.cookie('userId', userId, { httpOnly : true });
+  const { user_id } = res.locals;
+  res.cookie('user_id', user_id, { httpOnly : true });
   return next();
 }
 
