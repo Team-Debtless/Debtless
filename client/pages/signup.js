@@ -75,35 +75,37 @@ const Signup = () => {
   
   return (
     <>
-      <h1 className='signUpTitle'>Sign up for Debtless</h1>
+      <h1 className='signUpTitle'>Welcome to</h1>
+      <p id='logoName'>Debtless</p>
+      <h4 id='createAccount'>Create your account</h4>
       <div className='signUpForm'>
         <form>
           <div>
-            <label htmlFor='firstName'>First Name: </label>
+            {/* <label htmlFor='firstName'>First Name: </label> */}
             <input type='text' id='firstName' onChange={handleFirstName} placeholder='First Name'></input>
           </div>
           <div>
-            <label htmlFor='lastName'>Last Name: </label>
+            {/* <label htmlFor='lastName'>Last Name: </label> */}
             <input type='text' id='lastName' onChange={handleLastName} placeholder='Last Name'></input>
           </div>
           <div>
-            <label htmlFor='description'>Description: </label>
+            {/* <label htmlFor='description'>Description: </label> */}
             <input type='text' id='description' onChange={handleDescription} placeholder='Description'></input>
           </div>
           <div>
-            <label htmlFor='monthlyIncome'>Monthly Income: </label>
+            {/* <label htmlFor='monthlyIncome'>Monthly Income: </label> */}
             <input type='number' id='monthlyIncome' onChange={handleMonthlyIncome} placeholder='Monthly Income'></input>
           </div>
           <div>
-            <label htmlFor='monthlyBudget'>Monthly Budget: </label>
+            {/* <label htmlFor='monthlyBudget'>Monthly Budget: </label> */}
             <input type='number' id='monthlyBudget' onChange={handleMonthlyBudget} placeholder='Monthly Budget'></input>
           </div>
           <div>
-            <label htmlFor='email'>Email: </label>
+            {/* <label htmlFor='email'>Email: </label> */}
             <input type='text' id='semail' onChange={handleEmail} placeholder='Email'></input>
           </div>
           <div>
-            <label htmlFor='spassword'>Password: </label>
+            {/* <label htmlFor='spassword'>Password: </label> */}
             <input type='password' id='spassword' onChange={handlePass} placeholder='Password'></input>
           </div>
           <button type='submit' onClick={createNewUser}>Create</button>

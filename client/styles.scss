@@ -1,70 +1,140 @@
-
-#lemail{
-  width: 61.5%;
-  margin-left: 26px;
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+html {
+  background-color: #212529;
 }
+
 #loginContainer{
+  #loginBtn{
+    width: 98%;
+    height: 28px;
+    background-color: #38B000;
+    border: none;
+    border-radius: 0.25rem;
+  }
   #loginForm{
     input {
-      
+      width:98%;
+      height: 25px;
       margin-bottom: 10px;
+      background-color: #212529;
+      border: 1px solid hsl(0, 0%, 83%);
+      border-radius: 0.25rem;
     }
-    position: absolute;
-    text-align: center;
-    top: 40%;
-    left: 23%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
   }
     box-sizing: border-box;
     font-family: 'Arial';
     padding: 2rem;
-    background-color: rgb(167, 165, 165);
-    border: 4px solid hsl(0, 0%, 100%);
+    border: 1px solid hsl(0, 0%, 100%);
+    background-color: #212529;
+    border-radius: 1rem;
     text-align:justify;
-    box-shadow: 1px 1px 1px 1px rgb(0,0,0,0.2);
+    box-shadow: 5px 5px 5px 5px rgb(0,0,0,0.2);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 300px;
+    height: 250px;
     
 }
 #loginTitle{
   display: flex;
   justify-content: center;
-  align-items:end;
-  position: absolute;
-  top: 30%;
-  left: 35%;
+  align-items:center;
+  height:63vh;
+  color: white
 }
 #needAccount {
   #resignup{
     background-color: transparent;
     border: none;
+    color: #9EF01A;
   }
   display: flex;
   justify-content: center;
-  align-items:end;
-  position: absolute;
-  top: 65%;
-  left: 40%;
+  align-items: center;
+  height: 20vh;
+  margin-left: 0px;
+  color: white;
 }
 
 .signUpTitle {
   display: flex;
   justify-content: center;
+  color: #9EF01A;
+  margin-top: 30px;
+  margin-bottom: 0px;
 }
-
-.signUpForm {
+#logoName {
+  font-family: 'Bungee Shade';
   display: flex;
   justify-content: center;
+  font-size: 50px;
+  color: #9EF01A;
+  margin-top: 10px;
+}
+#createAccount{
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 13vh;
+}
+.signUpForm {
+  button {
+    width: 213%;
+    height: 28px;
+    background-color: #38B000;
+    border: none;
+    border-radius: 0.25rem;
+  }
+  input{
+    width:200%;
+    height: 25px;
+    margin-bottom: 20px;
+    background-color: #212529;
+    border: 1px solid hsl(0, 0%, 83%);
+    border-radius: 0.25rem;
+    padding-left: 18px;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   text-align: center;
+  box-sizing: border-box;
+  font-family: 'Arial';
+  padding: 2rem;
+  border: 1px solid hsl(0, 0%, 100%);
+  background-color: #212529;
+  border-radius: 1rem;
+  text-align:justify;
+  box-shadow: 5px 5px 5px 5px rgb(0,0,0,0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 500px;
 }
 
 .clickToLoginBtn {
+  #loginRedirect{
+    background-color: transparent;
+    color: #9EF01A;
+    border: none;
+  }
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin-left: 0px;
+  color: white;
 }
 
 .dashboard {
