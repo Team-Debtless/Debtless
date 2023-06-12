@@ -51,7 +51,6 @@ dataController.getExpenses = async (req, res, next) => {
     });
   }
 };
-
 dataController.sumMonthlyExpense = async (req, res, next) => {
   //grabs monthly expense using reduce iterate through expenses
   const { expenses } = res.locals;
@@ -96,4 +95,29 @@ dataController.getBudgetIncome = async (req, res, next) => {
     });
   }
 };
+dataController.getExpenses = async (req, res, next) => {
+  try {
+    const { user_id } = req.cookies;
+    const getExpenseQuery =
+      'SELECT e._id AS item_id, e.user_id, e.item, e.price, e.created_at, e.updated_at, e.deleted_at, c.name AS category_name FROM public.expense e INNER JOIN public.category c ON e.category_id = c._id WHERE e.user_id = $1';
+    const data = await db.query(getExpenseQuery, [user_id]);
+    if (!data.rows[0]) {
+      return next({
+        log: `dataController.getExpenses ERROR: No expenses found for this user`,
+        message: {
+          err: 'An error occured on dataController.getExpenses: No expenses found for this user',
+        },
+      });
+    } else {
+      res.locals.expenses = data.rows;
+      return next();
+    }
+  } catch (error) {
+    return next({
+      log: `dataController.getExpenses middleware ERROR: ${error}`,
+      message: { err: 'An error occured on dataController.getExpenses' },
+    });
+  }
+};
+
 module.exports = dataController;

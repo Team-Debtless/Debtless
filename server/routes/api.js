@@ -55,6 +55,12 @@ router.get('/dashboard', dataController.getBudgetIncome, dataController.getExpen
 
   //maybe shorten this to data? idk
   res.status(200).json({ budgetIncome: budgetIncome, monthlyExpense: monthlyExpense });
+/*
+  routes get expenses of user from db
+*/
+router.get('/expense', dataController.getExpenses, (req, res) => {
+  const { expenses } = res.locals;
+  res.status(200).json({ expenses: expenses }); // send expenses
 });
 
 module.exports = router;
