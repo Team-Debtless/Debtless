@@ -3,17 +3,16 @@
 CREATE TABLE public.user (
 	"_id" serial PRIMARY KEY,
 	"first_name" varchar NOT NULL,
-    "last_name" varchar NOT NULL,
+  "last_name" varchar NOT NULL,
 	"description" varchar,
 	"email" varchar  NOT NULL UNIQUE,
 	"monthly_income" money NOT NULL,
 	"monthly_budget" money NOT NULL,
 	"password" varchar  NOT NULL,
-  "created_at" date NOT NULL,
-  "updated_at" date,
-  "deleted_at" date
+  "created_at" timestamp NOT NULL,
+  "updated_at" timestamp,
+  "deleted_at" timestamp
 );
-
 
 CREATE TABLE public.expense (
   "_id" serial PRIMARY KEY,
@@ -21,14 +20,14 @@ CREATE TABLE public.expense (
   "category_id" bigint NOT NULL,
   "price" money NOT NULL,
   "user_id" bigint NOT NULL,
-  "created_at" date NOT NULL,
-  "updated_at" date,
-  "deleted_at" date
+  "created_at" timestamp NOT NULL,
+  "updated_at" timestamp,
+  "deleted_at" timestamp
 );
 
 CREATE TABLE public.category (
 	"_id" serial PRIMARY KEY,
-    "name" varchar NOT NULL
+  "name" varchar NOT NULL
 );
 
 ALTER TABLE public.expense ADD FOREIGN KEY ("category_id") REFERENCES public.category ("_id");
@@ -49,3 +48,11 @@ INSERT INTO public.category (name) VALUES('Medical');
 INSERT INTO public.category (name) VALUES('Shopping');
 INSERT INTO public.category (name) VALUES('Travel and Vacation');
 INSERT INTO public.category (name) VALUES('Misc.');
+
+
+-- insert dummy users
+
+INSERT INTO public.user (first_name, last_name, description, email, monthly_income, monthly_budget, password, created_at) VALUES ("Bryan", "Trang", "codesmith student", "bryan@email.com", 5000, 100, "password", )
+
+
+-- insert dummy expenses

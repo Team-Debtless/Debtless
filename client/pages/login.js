@@ -39,19 +39,19 @@ const Login = () => {
     setPassInput(e.target.value);
   }
   return (
-    <div>
+    <div id='loginPage'>
 
     <h1 id='loginTitle'>Login to Debtless</h1>
     <div id='loginContainer'>
       <form id='loginForm'>
-        <label htmlFor='lemail'>Email: </label>
+        {/* <label htmlFor='lemail'>Email: </label> */}
         <input type='text' id='lemail' onChange={handleEmailInput} placeholder='Enter Email'></input> <br></br>
-        <label htmlFor='lpassword'>Password: </label>
+        {/* <label htmlFor='lpassword'>Password: </label> */}
         <input type='password' id='lpassword' onChange={handlePassInput} placeholder='Enter Password'></input><br></br>
-        <button type='submit' onClick={loginUser}>Login</button>
+        <button type='submit' id='loginBtn' onClick={loginUser}>Login</button>
       </form>
-    </div>
       <div id='needAccount'>Need an account?<button id='resignup' onClick={signUpRedirect}><u>Signup</u></button></div>
+    </div>
     </div>
   )
 }
