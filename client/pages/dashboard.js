@@ -13,7 +13,7 @@ const Dashboard = () => {
     labels: Data.map((data) => data.year), 
     datasets: [
       {
-        label: "Total Users Gained ",
+        label: "Total Spent",
         data: Data.map((data) => data.userGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
@@ -29,7 +29,7 @@ const Dashboard = () => {
   });
    
   return (
-    <div className="dashboard">
+    <div className="page">
       <PieChart chartData={chartData} />
       <BarChart chartData={chartData} />
     </div>

@@ -3,10 +3,10 @@ import Modal from './expense_modal';
 
 const Expenses = () => {
   return (
-    <>
-      <div>Expenses</div>
+    <div className='page'>
+      <h2>Expenses</h2>
       <Modal />
-    </>
+    </div>
   )
 }
 
