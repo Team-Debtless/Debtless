@@ -57,7 +57,6 @@ userController.createUser = async (req, res, next) => {
     } = req.body;
 
     const created_at = moment().format();
-    console.log(created_at);
     let createUserQuery = `INSERT INTO public.user (first_name, last_name, description, email, monthly_income, monthly_budget, password, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;`;
 
     const data = await db.query(createUserQuery, [
