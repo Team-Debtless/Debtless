@@ -48,3 +48,11 @@ INSERT INTO public.category (name) VALUES('Medical');
 INSERT INTO public.category (name) VALUES('Shopping');
 INSERT INTO public.category (name) VALUES('Travel and Vacation');
 INSERT INTO public.category (name) VALUES('Misc.');
+
+
+-- insert dummy users
+
+INSERT INTO public.user (first_name, last_name, description, email, monthly_income, monthly_budget, password, created_at) VALUES ("Bryan", "Trang", "codesmith student", "bryan@email.com", 5000, 100, "password", )
+
+
+-- insert dummy expenses
