@@ -17,6 +17,7 @@ dataController.addExpense = async (req, res, next) => {
       user_id,
       created_at,
     ]);
+    res.locals.expense = data.rows[0];
     return next();
   } catch (error) {
     return next({

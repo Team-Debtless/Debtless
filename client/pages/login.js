@@ -45,9 +45,9 @@ const Login = () => {
     <div id='loginContainer'>
       <form id='loginForm'>
         {/* <label htmlFor='lemail'>Email: </label> */}
-        <input type='text' id='lemail' onChange={handleEmailInput} placeholder='Enter Email'></input> <br></br>
+        <input type='text' id='lemail' onChange={handleEmailInput} placeholder='Email'></input> <br></br>
         {/* <label htmlFor='lpassword'>Password: </label> */}
-        <input type='password' id='lpassword' onChange={handlePassInput} placeholder='Enter Password'></input><br></br>
+        <input type='password' id='lpassword' onChange={handlePassInput} placeholder='Password'></input><br></br>
         <button type='submit' id='loginBtn' onClick={loginUser}>Login</button>
       </form>
       <div id='needAccount'>Need an account?<button id='resignup' onClick={signUpRedirect}><u>Signup</u></button></div>

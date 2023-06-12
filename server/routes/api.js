@@ -35,7 +35,8 @@ router.post(
   routes add an expense to db
 */
 router.post('/expense', dataController.addExpense, (req, res) => {
-  res.status(200).json({ message: 'Expense added sucessfully' });
+  const { expense } = res.locals;
+  res.status(200).json({ message: 'Expense added sucessfully', expense: expense });
 });
 
 /*
