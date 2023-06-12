@@ -10,7 +10,7 @@ const BarChart = ({ chartData }) => {
           plugins: {
             title: {
               display: true,
-              text: "Monthly spend vs monthly budget"
+              text: "Monthly spent"
             },
             legend: {
               display: false

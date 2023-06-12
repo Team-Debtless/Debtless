@@ -59,6 +59,8 @@ const Modal = () => {
     })
   }
 
+  const options = { year: "numeric", month: "long", day: "numeric" };
+
   useEffect(() => {
     fetch('/api/expense')
     .then(data => data.json())
@@ -67,12 +69,14 @@ const Modal = () => {
       setExpenseTableRows(
         response.expenses.map(el => {      
             {/* table data */} 
+            const readableDate = new Date(el.created_at).toDateString(undefined, options);
+            console.log('readableDate', readableDate);
             return(
             <tr>
               <td>{el.item}</td>
               <td>{el.price}</td>
               <td>{el.category_name}</td>
-              <td>{el.created_at}</td> 
+              <td>{readableDate}</td>
             </tr>       
           )
         })
@@ -145,7 +149,7 @@ const Modal = () => {
             <th>Item</th>
             <th>Price</th>
             <th>Category</th>
-            <th>Date/Time</th>
+            <th>Date</th>
           </tr>
         {expenseTableRows}
       </table>
