@@ -5,7 +5,7 @@ const Modal = () => {
   const [item, setItem] = useState('');
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState(1);
-  const [expenseTable, setExpenseTable] = useState([]);
+  const [expenseTableRows, setExpenseTableRows] = useState([]);
   const [latestExpense, setLatestExpense] = useState({});
 
   const id_key = {
@@ -29,9 +29,9 @@ const Modal = () => {
   };
 
   if(modal) {
-    document.body.classList.add('active-modal')
+    document.body.classList.add('active-modal');
   } else {
-    document.body.classList.remove('active-modal')
+    document.body.classList.remove('active-modal');
   }
   
   const addExpense = (event) => {
@@ -49,38 +49,32 @@ const Modal = () => {
     })
     .then(data => data.json())
     .then(response => {
-      setLatestExpense(response.expense)
-      console.log('response.message', response.message)
+      setLatestExpense(response.expense);
+      //window.alert(response.message);
+      item.value = '';
+      price.value = '';
     })
     .catch(err => {
       console.log('addExpensePostError', err);
     })
   }
 
-  useEffect(
+  useEffect(() => {
     fetch('/api/expense')
     .then(data => data.json())
     .then(response => {
-      setExpenseTable(
-        response.map(el => {
-          <table>
-            {/* table rows */}
+      console.log('response', response);
+      setExpenseTableRows(
+        response.expenses.map(el => {      
+            {/* table data */} 
+            return(
             <tr>
-                {/* table headers */}
-                <th>Item</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Date/Time</th>
-            </tr>
-            <tr>
-                {/* table data */} 
-                <td>{el.item}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-          </table>
+              <td>{el.item}</td>
+              <td>{el.price}</td>
+              <td>{el.category_name}</td>
+              <td>{el.created_at}</td> 
+            </tr>       
+          )
         })
       )
       console.log('response.expenses', response.expenses)
@@ -88,7 +82,9 @@ const Modal = () => {
     .catch(err => {
       console.log('addExpenseGetError', err);
     })
-  , [latestExpense])
+  }, [latestExpense])
+
+  console.log('expenseTableRows', expenseTableRows);
 
   const handleItem = (e) => {
     setItem(e.target.value);
@@ -106,7 +102,7 @@ const Modal = () => {
   return (
     <>
       <button onClick={toggleModal} className="btn-modal">
-        Open
+        Add New Expense
       </button>
 
       {modal && (
@@ -116,8 +112,8 @@ const Modal = () => {
             <h2>Add an expense</h2>
             <div id ='expenseContainer'>
              <form onSubmit={addExpense}>
-                <input type='text' placeholder='Item' onChange={handleItem}></input>
-                <input type='number' placeholder='Price' onChange={handlePrice}></input>
+                <input id='item' type='text' placeholder='Item' onChange={handleItem}></input> <br></br>
+                <input id='price' type='number' placeholder='Price' step=".01" onChange={handlePrice}></input> <br></br>
                 <select id='categories' onChange={handleCategory}>
                     <option value='auto'>Auto & Transport</option>
                     <option value='bills'>Bills & Utilities</option>
@@ -132,17 +128,27 @@ const Modal = () => {
                     <option value='shopping'>Shopping</option>
                     <option value='travel'>Travel & Vacation</option>
                     <option value='misc'>Miscellaneous</option>
-                </select>
-                <button>Add</button>
+                </select><br></br>
+                <button id='addBtn'>Add</button> <br></br>
              </form>
             </div>
-            <button className="close-modal" onClick={toggleModal}>
-              X
+            <br></br><button className="close-modal" onClick={toggleModal}>
+              Cancel
             </button>
           </div>
         </div>
       )}
-      {/* {expenseTable} */}
+        <table className='expenseTable'>
+          {/* table rows */}
+          <tr>
+            {/* table headers */}
+            <th>Item</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Date/Time</th>
+          </tr>
+        {expenseTableRows}
+      </table>
     </>
   );
 }

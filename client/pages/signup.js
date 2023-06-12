@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Login from './login';
 import { Link, Route, Routes } from 'react-router-dom';
+import debtlessLogo from '../assets/DEBTLESS.svg';
+import bgPattern from '../assets/bg-pattern.svg';
+import blurOne from '../assets/bg-blur-1.svg';
+import blurTwo from '../assets/bg-blur-2.svg';
 
 const Signup = () => {
   const [firstNameInput, setFirstNameInput] = useState('');
@@ -74,45 +78,25 @@ const Signup = () => {
   }
   
   return (
-    <>
-      <h1 className='signUpTitle'>Welcome to</h1>
-      <p id='logoName'>Debtless</p>
-      <h4 id='createAccount'>Create your account</h4>
-      <div className='signUpForm'>
-        <form>
-          <div>
-            {/* <label htmlFor='firstName'>First Name: </label> */}
+    <div className='form-wrapper'>
+      <img src={bgPattern} className='bg-pattern' />
+      <h1 className='title'>Welcome to</h1>
+      <img src={debtlessLogo} className='logoName' />
+      <img src={blurOne} className='blur-one' />
+      <img src={blurTwo} className='blur-two' />
+      <h4 id='createAccount' className='sub-title'>Create your account</h4>
+        <form className='form-div' >
             <input type='text' id='firstName' onChange={handleFirstName} placeholder='First Name'></input>
-          </div>
-          <div>
-            {/* <label htmlFor='lastName'>Last Name: </label> */}
             <input type='text' id='lastName' onChange={handleLastName} placeholder='Last Name'></input>
-          </div>
-          <div>
-            {/* <label htmlFor='description'>Description: </label> */}
             <input type='text' id='description' onChange={handleDescription} placeholder='Description'></input>
-          </div>
-          <div>
-            {/* <label htmlFor='monthlyIncome'>Monthly Income: </label> */}
             <input type='number' id='monthlyIncome' onChange={handleMonthlyIncome} placeholder='Monthly Income'></input>
-          </div>
-          <div>
-            {/* <label htmlFor='monthlyBudget'>Monthly Budget: </label> */}
             <input type='number' id='monthlyBudget' onChange={handleMonthlyBudget} placeholder='Monthly Budget'></input>
-          </div>
-          <div>
-            {/* <label htmlFor='email'>Email: </label> */}
             <input type='text' id='semail' onChange={handleEmail} placeholder='Email'></input>
-          </div>
-          <div>
-            {/* <label htmlFor='spassword'>Password: </label> */}
             <input type='password' id='spassword' onChange={handlePass} placeholder='Password'></input>
-          </div>
-          <button type='submit' onClick={createNewUser}>Create</button>
+          <button type='submit' className="green-btn" onClick={createNewUser}>Create</button>
         </form>
-      </div>
-      <div className='clickToLoginBtn'>Click here to <button id='loginRedirect' onClick={loginRedirect}><u>Login</u></button></div>
-    </>
+      <div className='login-signup-div'>Have an account? <button id='loginRedirect' className='login-signup-btn' onClick={loginRedirect}>Login</button></div>
+    </div>
   )
 }
 

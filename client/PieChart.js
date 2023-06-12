@@ -1,10 +1,10 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 function PieChart({ chartData }) {
   return (
     <div className="chart-container">
-      <Pie
+      <Doughnut
         data={chartData}
         options={{
           plugins: {
