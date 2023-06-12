@@ -40,8 +40,8 @@ html {
     transform: translate(-50%, -50%);
     width: 400px;
     height: 250px;
-    
 }
+
 #loginTitle{
   display: flex;
   justify-content: center;
@@ -83,7 +83,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 13vh;
+  margin-bottom: 0px;
+  height: 3vh;
 }
 .signUpForm {
   button {
@@ -101,6 +102,7 @@ html {
     border: 1px solid hsl(0, 0%, 83%);
     border-radius: 0.25rem;
     padding-left: 18px;
+    color: white;
   }
   display: flex;
   flex-direction: column;
@@ -115,10 +117,11 @@ html {
   border-radius: 1rem;
   text-align:justify;
   box-shadow: 5px 5px 5px 5px rgb(0,0,0,0.2);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  margin: 0 auto;
   width: 400px;
   height: 500px;
 }
@@ -132,9 +135,14 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 3vh;
   margin-left: 0px;
   color: white;
+  margin-top: 0px;
+}
+
+.navbar {
+  list-style-type: none;
 }
 
 .dashboard {
@@ -157,3 +165,53 @@ html {
   background-color: aqua;
   
 }
+
+/* CSS for modal */
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49,49,49,0.8);
+}
+.modal-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #212529;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  color:white;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+
+
+
