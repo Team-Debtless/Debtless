@@ -59,32 +59,34 @@ const Modal = () => {
       });
   };
 
+  const options = { year: "numeric", month: "long", day: "numeric" };
+
   useEffect(() => {
     fetch('/api/expense')
-      .then((data) => data.json())
-      .then((response) => {
-        console.log('response', response);
-        setExpenseTableRows(
-          response.expenses.map((el) => {
-            {
-              /* table data */
-            }
-            return (
-              <tr>
-                <td>{el.item}</td>
-                <td>{el.price}</td>
-                <td>{el.category_name}</td>
-                <td>{el.created_at}</td>
-              </tr>
-            );
-          })
-        );
-        console.log('response.expenses', response.expenses);
-      })
-      .catch((err) => {
-        console.log('addExpenseGetError', err);
-      });
-  }, [latestExpense]);
+    .then(data => data.json())
+    .then(response => {
+      console.log('response', response);
+      setExpenseTableRows(
+        response.expenses.map(el => {      
+            {/* table data */} 
+            const readableDate = new Date(el.created_at).toDateString(undefined, options);
+            console.log('readableDate', readableDate);
+            return(
+            <tr>
+              <td>{el.item}</td>
+              <td>{el.price}</td>
+              <td>{el.category_name}</td>
+              <td>{readableDate}</td>
+            </tr>       
+          )
+        })
+      )
+      console.log('response.expenses', response.expenses)
+    })
+    .catch(err => {
+      console.log('addExpenseGetError', err);
+    })
+  }, [latestExpense])
 
   console.log('expenseTableRows', expenseTableRows);
 
@@ -158,17 +160,19 @@ const Modal = () => {
           </div>
         </div>
       )}
-      <table className="expenseTable">
-        {/* table rows */}
-        <tr>
-          {/* table headers */}
-          <th>Item</th>
-          <th>Price</th>
-          <th>Category</th>
-          <th>Date/Time</th>
-        </tr>
-        {expenseTableRows}
-      </table>
+      <div className='table-div'>
+        <table className='expenseTable'>
+          {/* table rows */}
+          <tr>
+            {/* table headers */}
+            <th>Item</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Date</th>
+          </tr>
+            {expenseTableRows.reverse()}
+        </table>
+      </div>
     </>
   );
 };

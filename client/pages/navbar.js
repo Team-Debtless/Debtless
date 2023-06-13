@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import debtlessLogo from '../assets/DEBTLESS.svg';
 import listIcon from '../assets/list-icon.svg';
 import chartIcon from '../assets/chart-icon.svg';
@@ -11,18 +11,14 @@ const Navbar = () => {
       <img src={debtlessLogo} className="nav-logo" />
       <img src={bgPattern} className="nav-bg" />
 
-      <Link to="/dashboard">
-        <div className="nav-menu-item">
+      <NavLink to="/dashboard" className="nav-menu-item">
           <img src={chartIcon} className="nav-menu-icon" /> Dashboard
-        </div>
-      </Link>
+      </NavLink>
 
-      <Link to="/api/expenses">
-        <div className="nav-menu-item">
+      <NavLink to="/api/expenses" className="nav-menu-item">
           <img src={listIcon} className="nav-menu-icon" />
           Expenses
-        </div>
-      </Link>
+      </NavLink>
 
       {/* <li>
           <Link to='/login'>Login</Link>
