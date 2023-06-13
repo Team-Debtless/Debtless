@@ -10,6 +10,7 @@ Chart.register(CategoryScale);
 
 const Dashboard = () => {
   const [monthlySpent, setMonthlySpent] = useState(0);
+  const [monthlyBudget, setMonthlyBudget] = useState(0);
   const [chartData, setChartData] = useState({
     labels: Data.map((data) => data.category), 
     datasets: [
@@ -59,25 +60,32 @@ const Dashboard = () => {
           "f3d8c7",
         ],
         borderColor: "white",
-        borderWidth: 2
+        borderWidth: 2,
+        color: 'white',
       }
     ]
   })
   // res.status(200).json({ budgetIncome: budgetIncome, monthlyExpense: monthlyExpense });
+  // budgetIncome: { monthly_income: '$0.00', monthly_budget: '$102.00' },
   useEffect(() => {
     fetch('/api/dashboard')
     .then(data => data.json())
     .then(response => {
-      console.log('response.monthlyExpense', response.monthlyExpense);
       setMonthlySpent(response.monthlyExpense);
+      // add conditional if monthly_budget is undefined to display $0
+      setMonthlyBudget(response.budgetIncome.monthly_budget);
     })
   }, []);
    
   return (
     <div className="page">
-      <div>
-        Monthly Spent: ${monthlySpent}
-      </div>
+      <h2 className="title left">Dashboard</h2>
+      <h3 className='sub-title left'>
+        Your Monthly Spend: ${monthlySpent}
+      </h3>
+      <h3 className='sub-title left'>
+        Your Monthly Budget: {monthlyBudget}
+      </h3>
       <PieChart chartData={chartData} />
       <BarChart chartData={barData} />
     </div>

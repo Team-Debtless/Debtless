@@ -60,20 +60,19 @@ dataController.sumMonthlyExpense = async (req, res, next) => {
   
   res.locals.monthlyExpense = monthlyExpense.reduce((sum, item) => sum + Number(item.price.replace(/[^0-9\.]+/g, "")), 0);
 
-  // const cache = {};
+  const cache = {};
 
-  // for (let i = 0; i < monthlyExpense.length; i++) {
-  //   let currentExpense = monthlyExpense[i];
-  //   console.log('currentExpense',currentExpense);
-  //   if (cache[currentExpense.category_name]) {
-  //     cache[currentExpense.category_name] += Number(currentExpense.price.replace(/[^0-9\.]+/g, "")));
-  //   } else {
-  //     cache[currentExpense.category_name] = Number(currentExpense.price.replace(/[^0-9\.]+/g, ""));
-  //   }
-  // }
-  //   console.log(cache);
-
-  // res.locals.categoricalExpense = cache;
+  for (let i = 0; i < monthlyExpense.length; i++) {
+    let currentExpense = monthlyExpense[i];
+    console.log('currentExpense',currentExpense);
+    if (cache[currentExpense.category_name]) {
+      cache[currentExpense.category_name] += Number(currentExpense.price.replace(/[^0-9\.]+/g, ""));
+    } else {
+      cache[currentExpense.category_name] = Number(currentExpense.price.replace(/[^0-9\.]+/g, ""));
+    }
+  }
+    console.log(cache);
+  res.locals.categoricalExpense = cache;
   
   return next();
 };
