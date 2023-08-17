@@ -33,7 +33,8 @@ const Dashboard = () => {
           "f3d8c7",
         ],
         borderColor: "white",
-        borderWidth: 2
+        borderWidth: 0,
+        barPercentage: 0.2,
       }
     ]
   });
@@ -58,6 +59,13 @@ const Dashboard = () => {
           "#4a4e69",
           "#ef8354",
           "f3d8c7",
+      // 'rgba(255, 99, 132, 0.2)',
+      // 'rgba(255, 159, 64, 0.2)',
+      // 'rgba(255, 205, 86, 0.2)',
+      // 'rgba(75, 192, 192, 0.2)',
+      // 'rgba(54, 162, 235, 0.2)',
+      // 'rgba(153, 102, 255, 0.2)',
+      // 'rgba(201, 203, 207, 0.2)'
         ],
         borderColor: "white",
         borderWidth: 2,
@@ -86,8 +94,10 @@ const Dashboard = () => {
       <h3 className='sub-title left'>
         Your Monthly Budget: {monthlyBudget}
       </h3>
-      <PieChart chartData={chartData} />
-      <BarChart chartData={barData} />
+      <di className='chartsContainer'>
+        <PieChart chartData={chartData} />
+        <BarChart chartData={barData} />
+      </di>
     </div>
     )
   }

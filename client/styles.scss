@@ -279,16 +279,30 @@ select:focus {
   align-items: center;
 }
 
+.chartsContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 75vh;
+  border: 1px solid green;
+}
+
 .chart-container {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: left;
-  // background-color: red;
-  height: 400px;
+  height: 60vh;
+  width: 35vw;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .bar-container {
-  width: 400px;
+  width: 35vw;
+  height: 60vh;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 table, th, td{
