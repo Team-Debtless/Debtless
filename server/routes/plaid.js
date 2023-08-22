@@ -13,5 +13,4 @@ router.post('/create_link_token',
   }
 );
 
-
 module.exports = router;

@@ -31,28 +31,20 @@ const PLAID_COUNTRY_CODES = (process.env.PLAID_COUNTRY_CODES || 'US').split(
 
 plaidController.getLinkToken = async (req, res, next) => {
   const { user_id } = res.locals;
-  //Front end sends us user_id
-  //We use the id to query for user info 
-  // Get the client_user_id by searching for the current user
-  const clientUserId = user_id;
+  const clientUserId = String(user_id);
   const request = {
     user: {
-      // This should correspond to a unique id for the current user.
       client_user_id: clientUserId,
-      // client_user_id: 'user-id',
     },
     client_name: 'Debtless',
     products: PLAID_PRODUCTS,
     language: 'en',
-    // webhook: 'https://webhook.example.com',
     redirect_uri: process.env.PLAID_REDIRECT_URI === '' ? '' : process.env.PLAID_REDIRECT_URI ,
     country_codes: PLAID_COUNTRY_CODES,
   };
   console.log(request);
   try {
     const createTokenResponse = await client.linkTokenCreate(request);
-    // res.json(createTokenResponse.data);
-    console.log(createTokenResponse);
     res.locals.tokenResponse = createTokenResponse.data;
     return next()
   } catch (error) {
