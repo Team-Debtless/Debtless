@@ -1,6 +1,6 @@
 const plaidController = {};
 
-const { Configuration, PlaidApi, Products, PlaidEnvironments} = require('plaid');
+const { Configuration, PlaidApi, Products, PlaidEnvironments, CountryCode } = require('plaid');
 require('dotenv').config()
 
 const configuration = new Configuration({
@@ -42,11 +42,11 @@ plaidController.getLinkToken = async (req, res, next) => {
       // client_user_id: 'user-id',
     },
     client_name: 'Debtless',
-    products: PLAID_PRODUCTS,
+    products: [Products.Auth],
     language: 'en',
     // webhook: 'https://webhook.example.com',
     redirect_uri: process.env.PLAID_REDIRECT_URI === '' ? '' : process.env.PLAID_REDIRECT_URI ,
-    country_codes: PLAID_COUNTRY_CODES,
+    country_codes: [CountryCode.Us],
   };
   console.log(request);
   try {
