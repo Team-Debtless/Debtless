@@ -1,3 +1,4 @@
+
 const plaidController = {};
 
 const { Configuration, PlaidApi, Products, PlaidEnvironments} = require('plaid');
@@ -41,6 +42,7 @@ plaidController.getLinkToken = async (req, res, next) => {
   try {
     const createTokenResponse = await client.linkTokenCreate(request);
     res.locals.tokenResponse = createTokenResponse.data;
+    console.log(createTokenResponse);
     return next()
   } catch (error) {
       // handle error
@@ -49,7 +51,26 @@ plaidController.getLinkToken = async (req, res, next) => {
         message: { err: 'An error occured on plaidController.getLinkToken' },
       });
   }
-}
+};
+
+plaidController.getAccessToken = async (req, res, next) => {
+  const request = {
+    public_token: publicToken,
+  };
+  try {
+    const response = await client.itemPublicTokenExchange(request);
+    
+    // These values should be saved to a persistent database and
+    // associated with the currently signed-in user
+    const accessToken = response.data.access_token;
+    const itemId = response.data.item_id;
+  } catch (error) {
+     return next({
+      log: `plaidController.getAccessToken middleware ERROR: ${error}`,
+      message: { err: 'An error occured on plaidController.getAccessToken' },
+    });
+  }
+};
 
 
 module.exports = plaidController

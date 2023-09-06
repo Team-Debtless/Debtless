@@ -4,7 +4,8 @@ const userController = require('../controllers/userController');
 const cookieController = require('../controllers/cookieController');
 const plaidController = require('../controllers/plaidController');
 
-router.post('/create_link_token', 
+router.post(
+  '/create_link_token', 
   userController.authenticateUser, 
   cookieController.setUserCookie, 
   plaidController.getLinkToken,
@@ -12,5 +13,14 @@ router.post('/create_link_token',
     res.status(200).json(res.locals.tokenResponse);
   }
 );
+
+router.post(
+  '/exchange_public_token',
+  plaidController.getAccessToken,
+  (req, res) => {
+    res.json({})
+  }
+);
+
 
 module.exports = router;
