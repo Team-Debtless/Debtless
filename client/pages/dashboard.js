@@ -12,31 +12,8 @@ const Dashboard = () => {
   const [monthlySpent, setMonthlySpent] = useState(0);
   const [monthlyBudget, setMonthlyBudget] = useState(0);
   const [chartData, setChartData] = useState({
-    labels: Data.map((data) => data.category), 
-    datasets: [
-      {
-        label: "Total Spent",
-        data: Data.map((data) => data.userGain),
-        backgroundColor: [
-          "#560BAD",
-          "#38B000",
-          "#7209B7",
-          "#B5179E",
-          "dee2ff",
-          "#8e9aaf",
-          "#3c6e71",
-          "#4FC4F6",
-          "#f3ba2f",
-          "#75c9c8",
-          "#4a4e69",
-          "#ef8354",
-          "f3d8c7",
-        ],
-        borderColor: "white",
-        borderWidth: 0,
-        barPercentage: 0.2,
-      }
-    ]
+    labels: Data.map((data) => data.category),
+    datasets: []
   });
 
   const [barData, setBarData] = useState({
@@ -79,6 +56,41 @@ const Dashboard = () => {
     fetch('/api/dashboard')
     .then(data => data.json())
     .then(response => {
+      const category = []
+      const totalSpent = [];
+      for(let key in response.categoricalExpense){
+        category.push(key);
+        totalSpent.push(`${response.categoricalExpense[key]}`);
+      }
+      setChartData(prevState => ({
+        ...prevState,
+        labels: category,
+        datasets: [
+          {
+            label: "Total Spent",
+            data: totalSpent,
+            backgroundColor: [
+              "#560BAD",
+              "#38B000",
+              "#7209B7",
+              "#B5179E",
+              "dee2ff",
+              "#8e9aaf",
+              "#3c6e71",
+              "#4FC4F6",
+              "#f3ba2f",
+              "#75c9c8",
+              "#4a4e69",
+              "#ef8354",
+              "f3d8c7",
+            ],
+            borderColor: "white",
+            borderWidth: 0,
+            barPercentage: 0.2,
+          }
+        ]
+      }));
+      // console.log('monthly spent response', response.categoricalExpense)
       setMonthlySpent(response.monthlyExpense);
       // add conditional if monthly_budget is undefined to display $0
       setMonthlyBudget(response.budgetIncome.monthly_budget);
