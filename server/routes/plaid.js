@@ -6,8 +6,6 @@ const plaidController = require('../controllers/plaidController');
 
 router.post(
   '/create_link_token', 
-  userController.authenticateUser, 
-  cookieController.setUserCookie, 
   plaidController.getLinkToken,
   (req, res) => {
     res.status(200).json(res.locals.tokenResponse);
@@ -18,7 +16,8 @@ router.post(
   '/exchange_public_token',
   plaidController.getAccessToken,
   (req, res) => {
-    res.json({})
+    // Access token attached to a signed jwt inside cookie labeled 'accessToken'
+    res.json({ public_token_exchange: 'complete' });
   }
 );
 

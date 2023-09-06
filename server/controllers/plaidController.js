@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 
 const plaidController = {};
 
@@ -27,8 +28,7 @@ const PLAID_COUNTRY_CODES = (process.env.PLAID_COUNTRY_CODES || 'US').split(
 );
 
 plaidController.getLinkToken = async (req, res, next) => {
-  const { user_id } = res.locals;
-  const clientUserId = String(user_id);
+  const clientUserId = String(req.cookies.user_id);
   const request = {
     user: {
       client_user_id: clientUserId,
@@ -42,7 +42,6 @@ plaidController.getLinkToken = async (req, res, next) => {
   try {
     const createTokenResponse = await client.linkTokenCreate(request);
     res.locals.tokenResponse = createTokenResponse.data;
-    console.log(createTokenResponse);
     return next()
   } catch (error) {
       // handle error
@@ -54,16 +53,27 @@ plaidController.getLinkToken = async (req, res, next) => {
 };
 
 plaidController.getAccessToken = async (req, res, next) => {
+  // const request = {
+  //   public_token: publicToken,
+  // };
+  const { public_token } = req.body;
   const request = {
-    public_token: publicToken,
+    public_token,
   };
   try {
     const response = await client.itemPublicTokenExchange(request);
-    
+    console.log('response: ', response);
     // These values should be saved to a persistent database and
     // associated with the currently signed-in user
     const accessToken = response.data.access_token;
+    console.log('accessToken: ', accessToken);
+    
     const itemId = response.data.item_id;
+    
+    const token = jwt.sign({ itemId, accessToken }, process.env.DEBTLESS_SECRET, { expiresIn: 60 * 60 });
+    // store token as a cookie
+    res.cookie('accessToken', token, { httpOnly: true, maxAge: 300000 });
+    return next();
   } catch (error) {
      return next({
       log: `plaidController.getAccessToken middleware ERROR: ${error}`,

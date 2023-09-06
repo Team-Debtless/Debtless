@@ -9,22 +9,25 @@ import { usePlaidLink } from 'react-plaid-link';
 // in configuration to initialize Plaid Link
 
 const Link = (props) => {
-  const onSuccess = React.useCallback((public_token, metadata) => {
+  const onSuccess = React.useCallback(async (public_token, metadata) => {
     // send public_token to server
-    const response = fetch('/plaid/exchange_public_token', {
+    const response = await fetch('/plaid/exchange_public_token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ public_token }),
     });
-    // Handle response ... should contain access_token... possibly
+    console.log('response???',response);
+    const data = await response.json();
+    console.log('what is this???', data.public_token_exchange); // 'completed'
   }, []);
   const config = {
     token: props.linkToken || null,
-    receivedRedirectUri: window.location.href,
+    receivedRedirectUri: null,
     onSuccess,
   };
+  console.log('config: ', config);
   const { open, ready } = usePlaidLink(config);
   return (
     <button onClick={() => open()} disabled={!ready}>
