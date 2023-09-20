@@ -15,6 +15,16 @@ const Signup = () => {
   const [monthlyBudgetInput, setMonthlyBudgetInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passInput, setPassInput] = useState('');
+
+  // can remove most states by storing info in Obj instead
+  // const [signupForm, setSignupForm] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   description: '',
+  //   monthlyIncome: 0,
+  //   monthlyBudget: 0,
+  // })
   
   
   const navigate = useNavigate();
@@ -76,6 +86,11 @@ const Signup = () => {
   const handlePass = (e) => {
     setPassInput(e.target.value);
   }
+
+  // USE this func to handle state updates for forms <- DRY
+  // const handleInput = (e) => {
+  //   setSignup((prev) => {...prev, [e.target.id]: e.target.value})
+  // }
   
   return (
     <div className='form-wrapper'>
