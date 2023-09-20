@@ -2,8 +2,10 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const path = require('path');
 const app = express();
+require('dotenv').config()
 
 const apiRouter = require('./routes/api');
+const plaidRouter = require('./routes/plaid');
 // parse incoming requires
 app.use(express.json());
 // parse incoming req cookies
@@ -17,6 +19,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', apiRouter);
+
+app.use('/plaid', plaidRouter);
 
 // add a catch all for 404 pages
 
@@ -37,6 +41,6 @@ app.use((error, req, res, next) => {
   res.status(errObj.status).json(errObj.message)
 })
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

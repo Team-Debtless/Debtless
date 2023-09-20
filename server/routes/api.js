@@ -65,8 +65,11 @@ router.get(
   dataController.sumMonthlyExpense, 
   (req, res) => {
     const { budgetIncome, monthlyExpense, categoricalExpense } = res.locals;
-    console.log(res.locals);
-    res.status(200).json({ budgetIncome: budgetIncome, monthlyExpense: monthlyExpense, categoricalExpense });
+    res.status(200).json({ 
+      budgetIncome: budgetIncome, // Object Array
+      monthlyExpense: monthlyExpense, // Number
+      categoricalExpense // Object
+    });
   }
 );
 
