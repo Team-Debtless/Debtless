@@ -20,6 +20,4 @@ router.post(
     res.json({ public_token_exchange: 'complete' });
   }
 );
-
-
 module.exports = router;

@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const plaidController = {};
 
+
 const { Configuration, PlaidApi, Products, PlaidEnvironments, CountryCode } = require('plaid');
+
 require('dotenv').config()
 
 const configuration = new Configuration({
