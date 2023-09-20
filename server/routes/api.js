@@ -15,7 +15,7 @@ router.post(
   userController.createUser,
   cookieController.setUserCookie,
   (req, res) => {
-    res.status(200).json({ message: 'User created succesfully' });
+    res.status(200).json({ message: 'User created successfully' });
   }
 );
 
@@ -39,7 +39,7 @@ router.post(
   dataController.addExpense, 
   (req, res) => {
     const { expense } = res.locals;
-    res.status(200).json({ message: 'Expense added sucessfully', expense: expense });
+    res.status(200).json({ message: 'Expense added successfully', expense: expense });
   }
 );
 
