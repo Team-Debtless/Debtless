@@ -5,8 +5,10 @@ import blurOne from '../assets/bg-blur-1.svg';
 import blurThree from '../assets/bg-blur-3.svg';
 
 const Login = () => {
-  const [emailInput, setEmailInput] = useState('');
-  const [passInput, setPassInput] = useState('');
+  const [login, setLogin] = useState({
+    email: '',
+    password: ''
+  });
   const navigate = useNavigate();
 
   const loginUser = (event) => {
@@ -17,8 +19,8 @@ const Login = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: emailInput,
-        password: passInput,
+        email: login.email,
+        password: login.password,
       })
     })
     .then(data => data.json())
@@ -39,13 +41,10 @@ const Login = () => {
     navigate('/');
   }
   
-  const handleEmailInput = (e) => {
-    setEmailInput(e.target.value);
+  const handleLogin = (e) => {
+    setLogin((prev) => ({...prev, [e.target.id]: e.target.value}));
   }
  
-  const handlePassInput = (e) => {
-    setPassInput(e.target.value);
-  }
   return (
     <div id='form-wrapper' className="form-wrapper">
             <img src={bgPattern} className='bg-pattern' />
@@ -54,10 +53,10 @@ const Login = () => {
     <h4 id='title' className="sub-title">Login</h4>
       <form id='loginForm' className="form-div">
         {/* <label htmlFor='lemail'>Email: </label> */}
-        <input type='text' id='lemail' onChange={handleEmailInput} placeholder='Email'></input> <br></br>
+        <input type='text' id='email' onChange={handleLogin} placeholder='Email'></input> <br></br>
         {/* <label htmlFor='lpassword'>Password: </label> */}
-        <input type='password' id='lpassword' onChange={handlePassInput} placeholder='Password'></input><br></br>
-        <button type='submit' id='loginBtn' className="green-btn" onClick={loginUser}>Login</button>
+        <input type='password' id='password' onChange={handleLogin} placeholder='Password'></input><br></br>
+        <button type='submit' id='oginBtn' className="green-btn" onClick={loginUser}>Login</button>
       </form>
       <div className='login-signup-div' >Need an account?<button id='resignup' className='login-signup-btn' onClick={signUpRedirect}>Signup</button></div>
     </div>
