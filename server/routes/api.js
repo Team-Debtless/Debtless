@@ -73,15 +73,4 @@ router.get(
   }
 );
 
-/*
-  routes get expenses of user from db
-*/
-router.get('/expense', 
-  dataController.getExpenses, 
-  (req, res) => {
-    const { expenses } = res.locals;
-    res.status(200).json({ expenses: expenses }); // send expenses
-  }
-);
-
 module.exports = router;

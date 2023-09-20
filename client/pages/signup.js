@@ -8,23 +8,15 @@ import blurOne from '../assets/bg-blur-1.svg';
 import blurTwo from '../assets/bg-blur-2.svg';
 
 const Signup = () => {
-  const [firstNameInput, setFirstNameInput] = useState('');
-  const [lastNameInput, setLastNameInput] = useState('');
-  const [descriptionInput, setDescriptionInput] = useState('');
-  const [monthlyIncomeInput, setMonthlyIncomeInput] = useState('');
-  const [monthlyBudgetInput, setMonthlyBudgetInput] = useState('');
-  const [emailInput, setEmailInput] = useState('');
-  const [passInput, setPassInput] = useState('');
-
-  // can remove most states by storing info in Obj instead
-  // const [signupForm, setSignupForm] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   description: '',
-  //   monthlyIncome: 0,
-  //   monthlyBudget: 0,
-  // })
+  const [signupForm, setSignupForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    description: '',
+    monthlyIncome: 0,
+    monthlyBudget: 0,
+  })
   
   
   const navigate = useNavigate();
@@ -37,13 +29,13 @@ const Signup = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        first_name: firstNameInput,
-        last_name: lastNameInput,
-        description: descriptionInput,
-        monthly_income: monthlyIncomeInput,
-        monthly_budget: monthlyBudgetInput,
-        email: emailInput,
-        password: passInput,
+        first_name: signupForm.firstName,
+        last_name: signupForm.lastName,
+        description: signupForm.description,
+        monthly_income: signupForm.monthlyIncome,
+        monthly_budget: signupForm.monthlyBudget,
+        email: signupForm.email,
+        password: signupForm.password
       })
     })
     .then(data => data.json())
@@ -59,38 +51,9 @@ const Signup = () => {
     navigate('/login', {replace: true});
   }
 
-  const handleFirstName = (e) => {
-    setFirstNameInput(e.target.value);
+  const handleInput = (e) => {
+    setSignup((prev) => ({...prev, [e.target.id]: e.target.value}))
   }
-
-  const handleLastName = (e) => {
-    setLastNameInput(e.target.value);
-  }
-  
-  const handleDescription = (e) => {
-    setDescriptionInput(e.target.value);
-  }
-  
-  const handleMonthlyIncome = (e) => {
-    setMonthlyIncomeInput(e.target.value);
-  }
-  
-  const handleMonthlyBudget = (e) => {
-    setMonthlyBudgetInput(e.target.value);
-  }
-
-  const handleEmail = (e) => {
-    setEmailInput(e.target.value);
-  }
- 
-  const handlePass = (e) => {
-    setPassInput(e.target.value);
-  }
-
-  // USE this func to handle state updates for forms <- DRY
-  // const handleInput = (e) => {
-  //   setSignup((prev) => {...prev, [e.target.id]: e.target.value})
-  // }
   
   return (
     <div className='form-wrapper'>
@@ -101,13 +64,13 @@ const Signup = () => {
       <img src={blurTwo} className='blur-two' />
       <h4 id='createAccount' className='sub-title'>Create your account</h4>
         <form className='form-div' >
-            <input type='text' id='firstName' onChange={handleFirstName} placeholder='First Name'></input>
-            <input type='text' id='lastName' onChange={handleLastName} placeholder='Last Name'></input>
-            <input type='text' id='description' onChange={handleDescription} placeholder='Description'></input>
-            <input type='number' id='monthlyIncome' onChange={handleMonthlyIncome} placeholder='Monthly Income'></input>
-            <input type='number' id='monthlyBudget' onChange={handleMonthlyBudget} placeholder='Monthly Budget'></input>
-            <input type='text' id='semail' onChange={handleEmail} placeholder='Email'></input>
-            <input type='password' id='spassword' onChange={handlePass} placeholder='Password'></input>
+            <input type='text' id='firstName' onChange={handleInput} placeholder='First Name'></input>
+            <input type='text' id='lastName' onChange={handleInput} placeholder='Last Name'></input>
+            <input type='text' id='description' onChange={handleInput} placeholder='Description'></input>
+            <input type='number' id='monthlyIncome' onChange={handleInput} placeholder='Monthly Income'></input>
+            <input type='number' id='monthlyBudget' onChange={handleInput} placeholder='Monthly Budget'></input>
+            <input type='text' id='email' onChange={handleInput} placeholder='Email'></input>
+            <input type='password' id='password' onChange={handleInput} placeholder='Password'></input>
           <button type='submit' className="green-btn" onClick={createNewUser}>Create</button>
         </form>
       <div className='login-signup-div'>Have an account? <button id='loginRedirect' className='login-signup-btn' onClick={loginRedirect}>Login</button></div>
